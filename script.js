@@ -15,13 +15,13 @@ const saveButton = document.getElementById("saveBtn");
 const deleteButton = document.getElementById("deleteBtn");
 
 // //That's the function to get the information on the area name
-// const save = () => {
-//   const content = formNode.value;
-//   console.log(content);
+const save = () => {
+  const content = formNode.value;
+  console.log(content);
 
-//   localStorage.setItem(storageName, content);
-//   alert("Name Saved!");
-// };
+  localStorage.setItem(storageName, content);
+  alert("Name Saved!");
+};
 
 let nameArr = [];
 
@@ -31,14 +31,24 @@ formNode.onsubmit = function (e) {
 
   const nameConst = document.getElementById("names").value;
 
-  const newUser = new User(nome);
+  const newUser = new User(nameConst);
   nameArr.push(newUser);
   console.log(nameArr);
 
   const lista = document.querySelector(".lista");
   const li = document.createElement("li");
-  li.innerText = newUser.nameConst;
+  li.innerText = newUser.nome;
   lista.appendChild(li);
 };
 
-console.log(nameArr);
+const load = () => {
+  const memory = localStorage.getItem(storageName); // Aqui!
+
+  if (memory) {
+    console.log("TROVATO");
+    formNode.value = memory;
+  } else {
+    console.log("NON TROVATO");
+    alert("Nessun dato salvato in precedenza");
+  }
+};
